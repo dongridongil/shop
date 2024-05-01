@@ -16,6 +16,7 @@ const Detail = (props) => {
     })
 
     useEffect(() => {
+        //Array Set 정렬 배열안에서 중복되는 내용 막아주기
         let watch = localStorage.getItem('watched');
         watch = JSON.parse(watch)
         watch.push(shoesId.id)
@@ -56,31 +57,29 @@ const Detail = (props) => {
                 <div className="col-md-6">
                     <h4 className="pt-5">{shoesId.title}</h4>
                     <p>{shoesId.content}</p>
-                    <p>{shoesId.price}</p>
-                    <button onClick={() => { dispatch(addItem({ id: shoesId.id, name: shoesId.title, count: 1 })) }} className="btn btn-danger">주문하기</button>
+                    <p>{shoesId.price.toLocaleString()}</p>
+                    <button onClick={() => { dispatch(addItem({ id: shoesId.id, name: shoesId.title, count: 1 })) }} className="btn btn-danger">장바구니</button>
                 </div>
             </div>
 
             <Nav variant="tabs" defaultActiveKey="link0">
                 <Nav.Item >
-                    <Nav.Link onClick={() => { setTab(0) }} eventKey="link0">버튼0</Nav.Link>
+                    <Nav.Link onClick={() => { setTab(0) }} eventKey="link0">상품</Nav.Link>
                 </Nav.Item>
                 <Nav.Item  >
-                    <Nav.Link onClick={() => { setTab(1) }} eventKey="link1">버튼1</Nav.Link>
+                    <Nav.Link onClick={() => { setTab(1) }} eventKey="link1">원산지</Nav.Link>
                 </Nav.Item>
-                <Nav.Item >
-                    <Nav.Link onClick={() => { setTab(2) }} eventKey="link2">버튼2</Nav.Link>
-                </Nav.Item>
+
             </Nav>
 
-            <TabComponent shoes={props.shoes} tab={tab} />
+            <TabComponent shoesId={shoesId} tab={tab} />
 
 
         </div>
     )
 }
 
-const TabComponent = ({ tab, shoes }) => {
+const TabComponent = ({ tab, shoesId }) => {
 
     const [fade, setFade] = useState("")
 
@@ -93,7 +92,10 @@ const TabComponent = ({ tab, shoes }) => {
     }, [tab])
     return (
         <div className={`start ${fade}`}>
-            {[<div>{shoes[0].title} </div>, <div>내용1</div>, <div>내용2</div>][tab]}
+
+            {tab === 0 && <div>{shoesId.title}</div>}
+            {tab === 1 && <div>{shoesId.content}</div>}
+
         </div>
 
     )
