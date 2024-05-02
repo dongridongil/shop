@@ -75,7 +75,7 @@ function App() {
 
       <Navbar bg="light" data-bs-theme="light">
         <Container>
-          <Navbar.Brand href="/">ShoeShop</Navbar.Brand>
+          <Navbar.Brand>ShoeShop</Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link onClick={() => navigate("/")}>Home</Nav.Link>
             <Nav.Link onClick={() => navigate("/cart")}>Cart</Nav.Link>

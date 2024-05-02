@@ -5,13 +5,16 @@ import { changeCount, minusItem } from "./../store"
 
 
 
+
 function Cart() {
+
 
     const user = localStorage.getItem('userId');
     const cart = useSelector((state) => { return state.cart })
     const dispatch = useDispatch();//store.js로 요청을 보내주는 함수
     return (
         <div>
+
             <h6>{user} 의 장바구니</h6>
             <Table>
                 <thead>
